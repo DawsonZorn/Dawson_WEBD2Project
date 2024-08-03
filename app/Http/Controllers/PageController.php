@@ -8,10 +8,18 @@ use Inertia\Inertia;
 
 class PageController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $pages = Page::all();
-        return Inertia::render('Pages/Index', ['pages' => $pages]);
+        $sortBy = $request->input('sort', 'created_at');
+        $sortOrder = $request->input('order', 'desc');
+
+        $pages = Page::orderBy($sortBy, $sortOrder)->get();
+
+        return Inertia::render('Pages/Index', [
+            'pages' => $pages,
+            'currentSort' => $sortBy,
+            'currentOrder' => $sortOrder
+        ]);
     }
 
     public function create()
