@@ -23,7 +23,7 @@ class PageController extends Controller
     public function edit($id)
 {
     $page = Page::findOrFail($id);
-    return Inertia::render('Pages/EditPage', ['page' => $page]);
+    return Inertia::render('Pages/Edit', ['page' => $page]);
 }
 
 public function update(Request $request, $id)
@@ -34,14 +34,14 @@ public function update(Request $request, $id)
         'content' => 'required|string',
     ]));
 
-    return redirect()->route('Pages.show', $page->id);
+    return redirect()->route('pages.index', $page->id);
 }
 
 public function destroy($id)
 {
-    //$page = Page::findOrFail($id);
+    $page = Page::findOrFail($id);
     $page->delete();
-    return redirect()->route('Pages.index');
+    return redirect()->route('pages.index')->with('success', 'Page deleted.');
 }
 
     public function store(Request $request)
@@ -53,7 +53,7 @@ public function destroy($id)
 
         Page::create($request->all());
 
-        return redirect()->route('Pages.index');
+        return redirect()->route('pages.index');
     }
 
     public function show(Page $page)
