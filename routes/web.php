@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DawsonController;
+use App\Http\Controllers\PageController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,9 +37,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+//Dawsons controller
 Route::resource('Dawsons', DawsonController::class)
     ->only(['index', 'store', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
+
+    Route::get('/players', [DawsonController::class, 'players'])->name('players');
+
+    //Pages controller
+    Route::middleware(['auth', 'verified'])->group(function () {
+    Route::resource('pages', PageController::class);
+});
+
 
 require __DIR__.'/auth.php';
 

@@ -23,6 +23,14 @@ class DawsonController extends Controller
 
     }
 
+//     public function players()
+// {
+//     $comments = Comment::all(); // Adjust this to retrieve comments as needed
+//     return Inertia::render('Players', [
+//         'comments' => $comments,
+//     ]);
+// }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -39,9 +47,11 @@ class DawsonController extends Controller
         $validated = $request->validate([
 
             'message' => 'required|string|max:255',
+            
 
         ]);
         $request->user()->dawsons()->create($validated);
+
         return redirect(route('Dawsons.index'));
     }
 
