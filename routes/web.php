@@ -53,5 +53,7 @@ Route::resource('Dawsons', DawsonController::class)
     Route::resource('pages', PageController::class);
 });
 
+//comments controller
+Route::resource('comments', CommentController::class);
 
 require __DIR__.'/auth.php';
