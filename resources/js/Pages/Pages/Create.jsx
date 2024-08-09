@@ -5,6 +5,7 @@ import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Comments from '@/Components/Comments';
 
 export default function Create({ auth }) {
     const { data, setData, post, processing, reset, errors } = useForm({
@@ -64,6 +65,12 @@ export default function Create({ auth }) {
                                 Go Back
                             </a>
                         </div>
+                         {/* Display comments */}
+                         <div className="mt-6">
+                                {comments.map((comment) => (
+                                    <Comments key={comment.id} comment={comment} />
+                                ))}
+                            </div>
                     </div>
                 </div>
             </div>

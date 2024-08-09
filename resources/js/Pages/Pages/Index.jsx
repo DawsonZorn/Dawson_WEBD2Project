@@ -2,6 +2,7 @@ import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
+import Comments from '@/Components/Comments';
 
 export default function Index({ auth, pages, currentSort, currentOrder}) {
 

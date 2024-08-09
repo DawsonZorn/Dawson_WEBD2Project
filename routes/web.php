@@ -55,4 +55,3 @@ Route::resource('Dawsons', DawsonController::class)
 
 
 require __DIR__.'/auth.php';
-
