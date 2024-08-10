@@ -66,11 +66,15 @@ export default function Edit({ auth, page }) {
                             </a>
                         </div>
                          {/* Display comments */}
-                         <div className="mt-6">
-                                {comments.map((comment) => (
-                                    <Comments key={comment.id} comment={comment} />
-                                ))}
-                            </div>
+                         {/* <div className="mt-6">
+            {comments.length > 0 ? (
+                comments.map((comment) => (
+                    <Comments key={comment.id} comment={comment} />
+                ))
+            ) : (
+                <p>No comments available.</p>
+            )}
+        </div> */}
                     </div>
                 </div>
             </div>

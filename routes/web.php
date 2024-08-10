@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DawsonController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -55,5 +56,6 @@ Route::resource('Dawsons', DawsonController::class)
 
 //comments controller
 Route::resource('comments', CommentController::class);
+Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
 
 require __DIR__.'/auth.php';

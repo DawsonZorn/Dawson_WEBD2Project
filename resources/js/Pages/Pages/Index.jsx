@@ -4,21 +4,18 @@ import { Head, Link, useForm } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
 import Comments from '@/Components/Comments';
 
-export default function Index({ auth, pages, currentSort, currentOrder}) {
-
-    //Deleting created pages
+export default function Index({ auth, pages, currentSort, currentOrder }) {
     const { delete: destroy, processing } = useForm();
+
     const handleDelete = (id) => {
         if (confirm('Are you sure you want to delete this page?')) {
             destroy(route('pages.destroy', id));
         }
     };
 
-
-    //Sorting
     const handleSort = (sortBy) => {
         const order = currentSort === sortBy && currentOrder === 'asc' ? 'desc' : 'asc';
-        window.location.href = route('pages.index', {sort: sortBy, order});
+        window.location.href = route('pages.index', { sort: sortBy, order });
     }
 
     return (
@@ -85,6 +82,8 @@ export default function Index({ auth, pages, currentSort, currentOrder}) {
                                     </div>
                                     <div className="mt-2">{new Date(page.created_at).toLocaleDateString()}</div>
                                     <div className="mt-2">{new Date(page.updated_at).toLocaleDateString()}</div>
+                                    {/* Ensure comments array is passed even if empty */}
+                                    <Comments pageId={page.id} comments={page.comments || []} />
                                 </div>
                             ))}
                         </div>

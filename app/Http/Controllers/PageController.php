@@ -9,18 +9,22 @@ use Inertia\Inertia;
 class PageController extends Controller
 {
     public function index(Request $request)
-    {
-        $sortBy = $request->input('sort', 'created_at');
-        $sortOrder = $request->input('order', 'desc');
+{
+    $sortBy = $request->input('sort', 'created_at');
+    $sortOrder = $request->input('order', 'desc');
 
-        $pages = Page::orderBy($sortBy, $sortOrder)->get();
+    // Fetch pages with sorting
+    $pages = Page::with('comments')
+        ->orderBy($sortBy, $sortOrder)
+        ->get();
 
-        return Inertia::render('Pages/Index', [
-            'pages' => $pages,
-            'currentSort' => $sortBy,
-            'currentOrder' => $sortOrder
-        ]);
-    }
+    return Inertia::render('Pages/Index', [
+        'pages' => $pages,
+        'currentSort' => $sortBy,
+        'currentOrder' => $sortOrder,
+        'comments' => $pages->map->comments,
+    ]);
+}
 
     public function create()
     {
@@ -66,6 +70,7 @@ public function destroy($id)
 
     public function show(Page $page)
     {
+        $page->load('comments.user');
         return Inertia::render('Pages/Show', ['page' => $page]);
     }
 }
