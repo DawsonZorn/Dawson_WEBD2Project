@@ -74,4 +74,7 @@ class CommentController extends Controller
 
         return redirect(route('Pages.index'));
     }
+
+    
+
 }

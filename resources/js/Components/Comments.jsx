@@ -13,8 +13,10 @@ export default function Comments({ pageId, comments }) {
     const [editing, setEditing] = useState(false);
     const[currentComment, setCurrentComment] = useState('');
 
-    const handleEdit = (commentId) => {
-        
+    const handleDelete = async (commentId) =>{
+        const response = await fetch(`/comment/${commentId}`, {
+            method: 'delete'
+        })
     }
 
     const { data, setData, clearErrors, reset, errors } = useForm({
@@ -77,9 +79,9 @@ export default function Comments({ pageId, comments }) {
                                         <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 transition duration-150 ease-in-out" onClick={() => setEditing(true)}>
                                             Edit
                                         </button>
-                                        <Dropdown.Link as="button" href={route('comments.destroy', comment.id)} method="delete">
+                                        <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 transition duration-150 ease-in-out" onClick={() => handleDelete(comment.id)}>
                                             Delete
-                                        </Dropdown.Link>
+                                        </button>
                                     </Dropdown.Content>
                                 </Dropdown>
                             }
