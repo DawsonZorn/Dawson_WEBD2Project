@@ -28,4 +28,4 @@ RUN composer clear-cache
 
 EXPOSE 9000
 
-CMD ["php-fpm"]
+
