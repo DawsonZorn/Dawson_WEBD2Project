@@ -2,7 +2,6 @@ import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import PrimaryButton from '@/Components/PrimaryButton';
-import Comments from '@/Components/Comments';
 
 export default function Index({ auth, pages, currentSort, currentOrder }) {
     const { delete: destroy, processing } = useForm();
@@ -82,8 +81,6 @@ export default function Index({ auth, pages, currentSort, currentOrder }) {
                                     </div>
                                     <div className="mt-2">{new Date(page.created_at).toLocaleDateString()}</div>
                                     <div className="mt-2">{new Date(page.updated_at).toLocaleDateString()}</div>
-                                    {/* Ensure comments array is passed even if empty */}
-                                    <Comments pageId={page.id} comments={page.comments || []} />
                                 </div>
                             ))}
                         </div>

@@ -56,6 +56,8 @@ Route::resource('Dawsons', DawsonController::class)
 
 //comments controller
 Route::resource('comments', CommentController::class);
-Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+Route::patch('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+
+Route::post('comment', [CommentController::class, 'create']);
 
 require __DIR__.'/auth.php';

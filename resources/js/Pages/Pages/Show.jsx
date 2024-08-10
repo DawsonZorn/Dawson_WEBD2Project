@@ -27,15 +27,7 @@ export default function Show({ auth, page, comments }) {
                         </div>
                     </div>
                     {/* Include the Comments component */}
-                    {/* <div className="mt-6">
-            {comments.length > 0 ? (
-                comments.map((comment) => (
-                    <Comments key={comment.id} comment={comment} />
-                ))
-            ) : (
-                <p>No comments available.</p>
-            )}
-        </div> */}
+                    <Comments pageId={page.id} comments={page.comments || []} />
                 </div>
             </div>
         </AuthenticatedLayout>

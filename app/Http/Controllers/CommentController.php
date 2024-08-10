@@ -27,19 +27,20 @@ class CommentController extends Controller
         return redirect(route('Pages.index'));
     }
 
-    // public function update(Request $request, $page): RedirectResponse
-    // {
-    //     $page = Page::findOrFail($page);
-    //     Gate::authorize('update', $page);
+    public function create(Request $request) {
+        // Validate the request
+        $validated = $request->validate([
+            'page_id' => 'nullable',
+            'user_id' => 'nullable',
+            'message' => 'required|string|max:255',
+        ]);
 
-    //     $validated = $request->validate([
-    //         'message' => 'required|string|max:255',
-    //     ]);
+        $comment = Comment::create($validated);
+        $comment = Comment::with('user')->find($comment->id);
+        return response()->json($comment, 200);
+    }
 
-    //     $page->update($validated);
-
-    //     return redirect(route('Pages.index'));
-    // }
+    
     public function update(Request $request, Comment $comment): RedirectResponse
     {
         // Authorize the user to update the comment
@@ -48,13 +49,20 @@ class CommentController extends Controller
         // Validate the request
         $validated = $request->validate([
             'message' => 'required|string|max:255',
+            'id' => 'nullable',
+            'user_id' => 'nullable',
+            'page_id' => 'nullable',
         ]);
 
+        if(isset($validated['id'])){
+            
         // Update the comment
         $comment->update($validated);
 
         // Redirect back to the previous page or a specific route
         return redirect()->back()->with('success', 'Comment updated successfully.');
+        }
+        
     }
 
     public function destroy($page): RedirectResponse

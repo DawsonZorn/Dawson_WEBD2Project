@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    protected $fillable = ['user_id', 'page_id', 'message', 'created_at', 'updated_at'];
     use HasFactory;
 
     public function page()
@@ -18,4 +19,6 @@ public function user()
 {
     return $this->belongsTo(User::class);
 }
+
+
 }

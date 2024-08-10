@@ -105,8 +105,8 @@ export default function Authenticated({ user, header, children}) {
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                             Dashboard
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('Dawsons.index')} active={route().current('Dawsons.index')}>
-                            Home
+                        <ResponsiveNavLink href={route('pages.index')} active={route().current('pages.index')}>
+                            Players
                         </ResponsiveNavLink>
                     </div>
 
