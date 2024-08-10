@@ -19,16 +19,6 @@ export default function Homepage({ auth }) {
                                 <h1 className="text-4xl font-bold mt-4">Welcome to Winnipeg's Bayern Munich Fan Club</h1>
                                 <p className="mt-2 text-lg text-gray-600">Enjoy your stay!</p>
                             </div>
-                            {!auth.user && (
-                                <div className="mt-8 flex justify-center">
-                                    <Link
-                                        href={route('homepage')}
-                                        className="text-blue-500 hover:text-blue-700"
-                                    >
-                                        Continue as Guest
-                                    </Link>
-                                </div>
-                            )}
                         </div>
                     </div>
                 </div>
