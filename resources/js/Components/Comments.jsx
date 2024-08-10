@@ -12,18 +12,18 @@ export default function Comments({ pageId, comments }) {
     const { auth } = usePage().props;
     const [editing, setEditing] = useState(false);
     const[currentComment, setCurrentComment] = useState('');
+    const [commentList, setCommentList] = useState(comments);
 
     const handleDelete = async (commentId) =>{
         const response = await fetch(`/comment/${commentId}`, {
             method: 'delete'
         })
+        setCommentList(prevState => prevState.filter(comment => comment.id !== commentId)); //deletes comment from comment list
     }
 
     const { data, setData, clearErrors, reset, errors } = useForm({
         message: '',
     });
-
-    const [commentList, setCommentList] = useState(comments);
 
     const submit = async (e) => {
         e.preventDefault();
@@ -79,9 +79,11 @@ export default function Comments({ pageId, comments }) {
                                         <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 transition duration-150 ease-in-out" onClick={() => setEditing(true)}>
                                             Edit
                                         </button>
-                                        <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 transition duration-150 ease-in-out" onClick={() => handleDelete(comment.id)}>
+                                        {auth.user.role === 'admin' && (
+                                            <button className="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 transition duration-150 ease-in-out" onClick={() => handleDelete(comment.id)}>
                                             Delete
                                         </button>
+                                        )}
                                     </Dropdown.Content>
                                 </Dropdown>
                             }

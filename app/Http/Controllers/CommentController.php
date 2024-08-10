@@ -75,6 +75,8 @@ class CommentController extends Controller
         return redirect(route('Pages.index'));
     }
 
-    
+    public function adminDelete($commentId){
+        Comment::destroy($commentId);
+    }
 
 }
