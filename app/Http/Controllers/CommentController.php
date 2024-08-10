@@ -64,7 +64,7 @@ class CommentController extends Controller
         }
         
     }
-
+    
     public function destroy($page): RedirectResponse
     {
         $page = Page::findOrFail($page);

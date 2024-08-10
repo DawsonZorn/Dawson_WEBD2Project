@@ -102,7 +102,6 @@ export default function Comments({ pageId, comments }) {
                     </div>
                 </div>
             ))}
-            {/* Add new comment form */}
             <form onSubmit={submit}>
                 <textarea value={data.message} onChange={e => setData('message', e.target.value)} placeholder="Add a comment" className="mt-4 w-full text-gray-900 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"></textarea>
                 <InputError message={errors.message} className="mt-2" />
