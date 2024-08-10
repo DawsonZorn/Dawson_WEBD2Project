@@ -1,7 +1,7 @@
 import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
-import PrimaryButton from '@/Components/PrimaryButton';
+
 
 export default function Index({ auth, pages, currentSort, currentOrder }) {
     const { delete: destroy, processing } = useForm();

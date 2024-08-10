@@ -9,11 +9,15 @@ import { useForm, usePage } from '@inertiajs/react';
 dayjs.extend(relativeTime);
 
 export default function Comments({ pageId, comments }) {
+     // Destructure the 'auth' object from the page props, which contains the logged-in user's information
     const { auth } = usePage().props;
+    // Set up state for handling editing mode and the current comment being edited
     const [editing, setEditing] = useState(false);
     const[currentComment, setCurrentComment] = useState('');
+    // Set up state to manage the list of comments displayed on the page
     const [commentList, setCommentList] = useState(comments);
 
+    // Function to handle deleting a comment
     const handleDelete = async (commentId) =>{
         const response = await fetch(`/comment/${commentId}`, {
             method: 'delete'
@@ -27,6 +31,7 @@ export default function Comments({ pageId, comments }) {
 
     const submit = async (e) => {
         e.preventDefault();
+        // Get the CSRF token from the meta tag to include in the request headers
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         const response = await fetch('/comment', {
             method: "post",
@@ -41,6 +46,7 @@ export default function Comments({ pageId, comments }) {
             })
         })
         if(response.ok){
+            // Add the new comment to the comment list if the request was successful
             const newComment = await response.json()
             setCommentList(prevState => [...prevState, newComment])
         }else {
