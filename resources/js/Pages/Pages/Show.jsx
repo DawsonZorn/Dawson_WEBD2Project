@@ -26,7 +26,6 @@ export default function Show({ auth, page, comments }) {
                             </div>
                         </div>
                     </div>
-                    {/* Include the Comments component */}
                     <Comments pageId={page.id} comments={page.comments || []} />
                 </div>
             </div>
